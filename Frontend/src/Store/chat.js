@@ -17,9 +17,11 @@ export const useChatStore = create((set,get)=>({
     connectSocket : () => {
         if(get().socket?.connected) return ;
 
-        const socket = io("http://localhost:4000",{
-            withCredentials:true
-        });
+      const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || "http://localhost:4000";
+
+    const socket = io(SOCKET_URL,{
+        withCredentials:true
+    });
 
         set({socket});
         console.log("Here is the connected Socket --> ",get().socket);
